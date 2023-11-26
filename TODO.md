@@ -101,4 +101,33 @@ and can accept or deny that response.
 
 --Can approve the project that have been send.
 
+---
 
+# TODO what in this code
+
+---
+
+### In database.py
+
+1.In todo have a plan to make it get the table 
+from the project_manage.py and have a option to it .
+
+2.Create the table for the csv that have been at in.
+
+3.Have a option for select, filter, delete and
+join option to make a table that specific.
+
+---
+
+### In project_manage.py
+
+1.This is the manage option like add the new
+table in here
+
+2.Have a option of login with username and
+password to see they role or if that are not
+they can add new to the table.
+
+3.The last option is exit, it is for the time when
+someone want to exit from the current user or work
+so they can get to do in new one.
