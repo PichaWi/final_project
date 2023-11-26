@@ -1,9 +1,43 @@
 # import database module
+import csv
+import os
+# define a function called initializing
 
-# define a funcion called initializing
 
 def initializing():
-    pass
+    __location__ = os.path.realpath(
+        os.path.join(os.getcwd(), os.path.dirname(__file__)))
+
+    persons = []
+    with open(os.path.join(__location__, 'persons.csv')) as f:
+        rows = csv.DictReader(f)
+        for Item1 in rows:
+            persons.append(Item1)
+
+    logins = []
+    with open(os.path.join(__location__, 'login.csv')) as f:
+        rows = csv.DictReader(f)
+        for Item2 in rows:
+            logins.append(Item2)
+
+    project = []
+    with open(os.path.join(__location__, 'project.csv')) as f:
+        rows = csv.DictReader(f)
+        for Item3 in rows:
+            project.append(Item3)
+
+    advisor_pending_request = []
+    with open(os.path.join(__location__, 'advisor_pending_request.csv')) as f:
+        rows = csv.DictReader(f)
+        for Item4 in rows:
+            advisor_pending_request.append(Item4)
+
+    member_pending_request = []
+    with open(os.path.join(__location__, 'member_pending_request.csv')) as f:
+        rows = csv.DictReader(f)
+        for Item5 in rows:
+            member_pending_request.append(Item5)
+
 
 # here are things to do in this function:
 
@@ -16,10 +50,14 @@ def initializing():
     # add all these tables to the database
 
 
-# define a funcion called login
+# define a function called login
 
 def login():
-    pass
+    name_in = input(str('Your username: '))
+    pass_in = input(int('Your password: '))
+    if name_in in initializing():
+        if pass_in in initializing():
+            return
 
 # here are things to do in this function:
    # add code that performs a login task
@@ -28,6 +66,7 @@ def login():
 
 # define a function called exit
 def exit():
+
     pass
 
 # here are things to do in this function:
@@ -57,5 +96,5 @@ val = login()
 # elif val[1] = 'advisor':
     # see and do advisor related activities
 
-# once everyhthing is done, make a call to the exit function
+# once everything is done, make a call to the exit function
 exit()
