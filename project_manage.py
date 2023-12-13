@@ -1,42 +1,18 @@
 # import database module
-import csv
-import os
+from project_manage.py
+import Database, Table, read_csv, write_csv
+
+
 # define a function called initializing
 
-
-def initializing():
-    __location__ = os.path.realpath(
-        os.path.join(os.getcwd(), os.path.dirname(__file__)))
-
-    persons = []
-    with open(os.path.join(__location__, 'persons.csv')) as f:
-        rows = csv.DictReader(f)
-        for Item1 in rows:
-            persons.append(Item1)
-
-    logins = []
-    with open(os.path.join(__location__, 'login.csv')) as f:
-        rows = csv.DictReader(f)
-        for Item2 in rows:
-            logins.append(Item2)
-
-    project = []
-    with open(os.path.join(__location__, 'project.csv')) as f:
-        rows = csv.DictReader(f)
-        for Item3 in rows:
-            project.append(Item3)
-
-    advisor_pending_request = []
-    with open(os.path.join(__location__, 'advisor_pending_request.csv')) as f:
-        rows = csv.DictReader(f)
-        for Item4 in rows:
-            advisor_pending_request.append(Item4)
-
-    member_pending_request = []
-    with open(os.path.join(__location__, 'member_pending_request.csv')) as f:
-        rows = csv.DictReader(f)
-        for Item5 in rows:
-            member_pending_request.append(Item5)
+def initializing(data_directory):
+    tables = {}
+    for filename in os.listdir(data_directory):
+        if filename.endswith(".csv"):
+            table_name = os.path.splitext(filename)[0]
+            table_data = read_csv(os.path.join(data_directory, filename))
+            tables[table_name] = table_data
+    return tables
 
 
 # here are things to do in this function:
@@ -52,12 +28,16 @@ def initializing():
 
 # define a function called login
 
-def login():
-    name_in = input(str('Your username: '))
-    pass_in = input(int('Your password: '))
-    if name_in in initializing():
-        if pass_in in initializing():
-            return
+def login(users_table):
+    name_in = input('Your username: ')
+    pass_in = input('Your password: ')
+
+    # Validate login credentials against the users_table
+    for user in users_table:
+        if user['username'] == name_in and user['password'] == pass_in:
+            return user['ID'], user['role']
+
+    return None
 
 # here are things to do in this function:
    # add code that performs a login task
@@ -66,8 +46,10 @@ def login():
 
 # define a function called exit
 def exit():
-
-    pass
+    def exit(tables, data_directory):
+        # Write modified tables back to corresponding CSV files
+        for table_name, table_data in tables.items():
+            write_csv(os.path.join(data_directory, f"{table_name}.csv"), table_data)
 
 # here are things to do in this function:
    # write out all the tables that have been modified to the corresponding csv files
@@ -78,23 +60,30 @@ def exit():
 
 # make calls to the initializing and login functions defined above
 
-initializing()
-val = login()
+data_directory = 'C:\Code for work\Final_project'
+tables = initializing(data_directory)
+val = login(users_table)
 
 # based on the return value for login, activate the code that performs activities according to the role defined for that person_id
 
-# if val[1] = 'admin':
-    # see and do admin related activities
-# elif val[1] = 'student':
-    # see and do student related activities
-# elif val[1] = 'member':
-    # see and do member related activities
-# elif val[1] = 'lead':
-    # see and do lead related activities
-# elif val[1] = 'faculty':
-    # see and do faculty related activities
-# elif val[1] = 'advisor':
-    # see and do advisor related activities
+if val[1] and val == 'admin':
+    #see and do admin related activities
+    pass
+elif val[1] and val == 'student':
+    #see and do student related activities
+    pass
+elif val[1] and val == 'member':
+    #see and do member related activities
+    pass
+elif val[1] and val == 'lead':
+    #see and do lead related activities
+    pass
+elif val[1] and val == 'faculty':
+    #see and do faculty related activities
+    pass
+elif val[1] and val == 'advisor':
+    #see and do advisor related activities
+    pass
 
 # once everything is done, make a call to the exit function
 exit()

@@ -1,88 +1,85 @@
 # try wrapping the code below that reads a persons.csv file in a class and make it more general such that it can read in any csv file
 
-import csv, os
-
-__location__ = os.path.realpath(
-    os.path.join(os.getcwd(), os.path.dirname(__file__)))
-
-persons = []
-with open(os.path.join(__location__, 'persons.csv')) as f:
-    rows = csv.DictReader(f)
-    for Item6 in rows:
-        persons.append(dict(Item6))
-print(persons)
-
-logins = []
-with open(os.path.join(__location__, 'login.csv')) as f:
-    rows = csv.DictReader(f)
-    for Item5 in rows:
-        logins.append(dict(Item5))
+import csv
+import copy
 
 
 # add in code for a Database class
 class Database:
     def __init__(self):
-        self.database = []
-    def insert(self, table):
-        self.database.append(table)
+        self.tables = []
 
-    def search(self, table_name):
-        for table in self.database:
-            if table.table_name == table_name:
+    def insert_table(self, table):
+        self.tables.append(table)
+
+    def search_table(self, table_name):
+        for table in self.tables:
+            if table.get_table_name() == table_name:
                 return table
         return None
 # add in code for a Table class
-import copy
+
+
 class Table:
-    def __init__(self, table_name, table):
-        self.__table_name = table_name
-        self.__table = table
-
-    @property
-    def new_name(self, new_name):
-        self._new_name = new_name
-
-    @new_name.setter
-    def new_name(self, new_name):
-        self._new_name = new_name
+    def __init__(self, table_name, table_data):
+        self.table_name = table_name
+        self.table_data = table_data
 
     def join(self, other_table, common_key):
-        joined_table = Table(self.__table_name + '_join_' + other_table.table_name, [])
-        for Item1 in self.__table:
-            for Item2 in other_table.table_name:
-                if Item1[common_key] == Item2[common_key]:
-                    dict1 = copy.deepcopy(Item1)
-                    dict2 = copy.deepcopy(Item2)
+        joined_table = Table(f"{self.table_name}_join_{other_table.table_name}", [])
+        for item1 in self.table_data:
+            for item2 in other_table.table_data:
+                if item1[common_key] == item2[common_key]:
+                    dict1 = copy.deepcopy(item1)
+                    dict2 = copy.deepcopy(item2)
                     dict1.update(dict2)
-                    joined_table.__table.append(dict1)
+                    joined_table.table_data.append(dict1)
         return joined_table
 
     def filter(self, condition):
-        filter_table = Table(self.__table_name + '_filtered_', [])
-        for Item3 in self.__table:
-            if condition(Item3):
-                filter_table.__table.append(Item3)
+        filter_table = Table(f"{self.table_name}_filtered", [])
+        for item3 in self.table_data:
+            if condition(item3):
+                filter_table.table_data.append(item3)
         return filter_table
 
     def select(self, attribute_list):
-        select_table = Table(self.__table_name + '_selected_', [])
-        fills = []
-        for Item4 in self.__table:
-            dict_fill = {}
-            for key in Item4:
-                if key in attribute_list:
-                    dict_fill[key] = Item4[key]
-            fills.append(dict_fill)
+        select_table = Table(f"{self.table_name}_selected", [])
+        for item4 in self.table_data:
+            dict_fill = {key: item4[key] for key in item4 if key in attribute_list}
+            select_table.table_data.append(dict_fill)
         return select_table
 
+    def insert_entry(self, entry):
+        self.table_data.append(entry)
+
+    def update_entry(self, entry_key, entry_value, condition):
+        for item in self.table_data:
+            if condition(item):
+                item[entry_key] = entry_value
+
+    def get_table_name(self):
+        return self.table_name
 
     def __str__(self):
-        return self.__table_name + ':' + str(self.__table)
+        return f"{self.table_name}:{str(self.table_data)}"
 
 
-table1 = Table('persons', persons)
-table2 = Table('logins', logins)
-print(table2)
+def read_csv(file_path):
+    with open(file_path, 'r') as file:
+        reader = csv.DictReader(file)
+        data = [row for row in reader]
+    return data
+
+
+def write_csv(file_path, data):
+    with open(file_path, 'w', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=data[0].keys())
+        writer.writeheader()
+        writer.writerows(data)
+
+# Create a Database instance
+
 
 
 # modify the code in the Table class so that it supports the insert operation where an entry can be added to a list of dictionary
