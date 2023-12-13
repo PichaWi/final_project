@@ -1,7 +1,8 @@
 # import database module
 import os, csv
-from database import Database, Table, read_csv, write_csv
+from database import Database, Table, read_csv_file, write_csv
 
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 # define a function called initializing
 
@@ -10,7 +11,7 @@ def initializing(data_directory):
     for filename in os.listdir(data_directory):
         if filename.endswith(".csv"):
             table_name = os.path.splitext(filename)[0]
-            table_data = read_csv(os.path.join(data_directory, filename))
+            table_data = read_csv_file(os.path.join(data_directory, filename))
             table = Table(table_name, table_data)
             tables.insert_table(table)
 
@@ -37,10 +38,9 @@ def login(users_table):
     name_in = input('Your username: ')
     pass_in = input('Your password: ')
 
-    if users_table:
-        for user in users_table.table_data:
-            if user['username'] == name_in and user['password'] == pass_in:
-                return user['ID'], user['role']
+    for user in users_table.table_data:
+        if user['username'] == name_in and user['password'] == pass_in:
+            return user['ID'], user['role']
 
     print("Login failed. Invalid credentials or user not found.")
     return None
@@ -65,29 +65,31 @@ def exit(tables, data_directory):
 # make calls to the initializing and login functions defined above
 
 if __name__ == "__main__":
-    data_directory = 'C:\\Code for work\\Final_project'
+    data_directory = 'C:\\Code for work\\Final_project\\final_project'
     tables = initializing(data_directory)
-    val = login(tables.search_table('login'))
+    login_data = read_csv_file(os.path.join(data_directory, 'login.csv'))
+    login_table = tables.search_table('login')
+    val = login(login_table)
 
 
 # based on the return value for login, activate the code that performs activities according to the role defined for that person_id
 
-    if val[1] and val== 'admin':
+    if val and val[1] == 'admin':
         pass
 #see and do admin related activities
-    elif val[1] and val == 'student':
+    elif val and val[1] == 'student':
         pass
 #see and do student related activities
-    elif val[1] and val == 'member':
+    elif val and val[1] == 'member':
         pass
 #see and do member related activities
-    elif val[1] and val == 'lead':
+    elif val and val[1] == 'lead':
         pass
 #see and do lead related activities
-    elif val[1] and val == 'faculty':
+    elif val and val[1] == 'faculty':
         pass
     #see and do faculty related activities
-    elif val[1] and val == 'advisor':
+    elif val and val[1] == 'advisor':
         pass
 #see and do advisor related activities
 

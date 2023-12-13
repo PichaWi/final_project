@@ -1,5 +1,6 @@
 # try wrapping the code below that reads a persons.csv file in a class and make it more general such that it can read in any csv file
-import csv, os
+import csv
+import os
 import copy
 
 __location__ = os.path.realpath(
@@ -17,9 +18,12 @@ def read_csv_file(filename):
 
 def write_csv(file_path, data):
     with open(file_path, 'w', newline='') as file:
-        writer = csv.DictWriter(file, fieldnames=data[0].keys())
-        writer.writeheader()
-        writer.writerows(data)
+        if data:  # Check if the data list is not empty
+            writer = csv.DictWriter(file, fieldnames=data[0].keys())
+            writer.writeheader()
+            writer.writerows(data)
+        else:
+            print(f"Warning: The data list is empty for file {file_path}. No CSV file will be written.")
 
 
 # add in code for a Database class
