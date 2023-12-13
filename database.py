@@ -83,6 +83,32 @@ class Table:
     def get_table_name(self):
         return self.table_name
 
+    def get_project_status(self, project_id):
+        # Assuming 'status' is a key in your Project table
+        project = next((item for item in self.table_data if item['ID'] == project_id), None)
+        if project:
+            return project['status']
+        else:
+            return None
+
+    def modify_project_information(self, project_id, new_information):
+        # Assuming 'ID' is a key in your Project table
+        project_index = next((index for index, item in enumerate(self.table_data) if item['ID'] == project_id), None)
+        if project_index is not None:
+            # Update the project information
+            self.table_data[project_index].update(new_information)
+            return True
+        else:
+            return False
+
+    def get_responses_to_requests(self, project_id):
+        # Assuming 'responses' is a key in your Project table
+        project = next((item for item in self.table_data if item['ID'] == project_id), None)
+        if project and 'responses' in project:
+            return project['responses']
+        else:
+            return None
+
     def __str__(self):
         return f"{self.table_name}:{str(self.table_data)}"
 

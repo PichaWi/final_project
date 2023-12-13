@@ -81,7 +81,33 @@ if __name__ == "__main__":
         pass
 #see and do student related activities
     elif val and val[1] == 'member':
-        pass
+        member_table = tables.search_table('persons')
+
+        # Display the count of unique IDs in the 'persons' table
+        id_count = len(set(item['ID'] for item in member_table.table_data))
+        print(f"The 'persons' table has {id_count} unique IDs.")
+
+        # Assuming 'project' table has project information
+        project_table = tables.search_table('project')
+
+        # Member-specific activities
+        member_project_id = '123'  # Replace with the actual project ID for the member
+        status = project_table.get_project_status(member_project_id)
+        print(f"Project status: {status}")
+
+        # Modify project information
+        new_information = {'description': 'Updated description', 'deadline': '2023-12-31'}
+        success = project_table.modify_project_information(member_project_id, new_information)
+
+        if success:
+            print("Project information modified successfully")
+        else:
+            print("Project not found")
+
+        # Get responses to requests
+        responses = project_table.get_responses_to_requests(member_project_id)
+        print(f"Responses to requests: {responses}")
+
 #see and do member related activities
     elif val and val[1] == 'lead':
         pass
