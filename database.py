@@ -1,5 +1,4 @@
 # try wrapping the code below that reads a persons.csv file in a class and make it more general such that it can read in any csv file
-
 import csv
 import copy
 

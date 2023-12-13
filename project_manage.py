@@ -1,17 +1,18 @@
 # import database module
-from project_manage.py
-import Database, Table, read_csv, write_csv
+import os
+from database import Database, Table, read_csv, write_csv
 
 
 # define a function called initializing
 
 def initializing(data_directory):
-    tables = {}
+    tables = Database()
     for filename in os.listdir(data_directory):
         if filename.endswith(".csv"):
             table_name = os.path.splitext(filename)[0]
             table_data = read_csv(os.path.join(data_directory, filename))
-            tables[table_name] = table_data
+            table = Table(table_name, table_data)
+            tables.insert_table(table)
     return tables
 
 
@@ -32,8 +33,7 @@ def login(users_table):
     name_in = input('Your username: ')
     pass_in = input('Your password: ')
 
-    # Validate login credentials against the users_table
-    for user in users_table:
+    for user in users_table.table_data:
         if user['username'] == name_in and user['password'] == pass_in:
             return user['ID'], user['role']
 
@@ -45,11 +45,9 @@ def login(users_table):
         # returns [ID, role] if valid, otherwise returning None
 
 # define a function called exit
-def exit():
-    def exit(tables, data_directory):
-        # Write modified tables back to corresponding CSV files
-        for table_name, table_data in tables.items():
-            write_csv(os.path.join(data_directory, f"{table_name}.csv"), table_data)
+def exit(tables, data_directory):
+    for table in tables.tables:
+        write_csv(os.path.join(data_directory, f"{table.get_table_name()}.csv"), table.table_data)
 
 # here are things to do in this function:
    # write out all the tables that have been modified to the corresponding csv files
@@ -60,30 +58,31 @@ def exit():
 
 # make calls to the initializing and login functions defined above
 
-data_directory = 'C:\Code for work\Final_project'
-tables = initializing(data_directory)
-val = login(users_table)
+if __name__ == "__main__":
+    data_directory = 'C:\\Code for work\\Final_project'
+    tables = initializing(data_directory)
+    val = login(tables.search_table('login'))
 
 # based on the return value for login, activate the code that performs activities according to the role defined for that person_id
 
-if val[1] and val == 'admin':
-    #see and do admin related activities
-    pass
-elif val[1] and val == 'student':
-    #see and do student related activities
-    pass
-elif val[1] and val == 'member':
-    #see and do member related activities
-    pass
-elif val[1] and val == 'lead':
-    #see and do lead related activities
-    pass
-elif val[1] and val == 'faculty':
+    if val[1] and val== 'admin':
+        pass
+#see and do admin related activities
+    elif val[1] and val == 'student':
+        pass
+#see and do student related activities
+    elif val[1] and val == 'member':
+        pass
+#see and do member related activities
+    elif val[1] and val == 'lead':
+        pass
+#see and do lead related activities
+    elif val[1] and val == 'faculty':
+        pass
     #see and do faculty related activities
-    pass
-elif val[1] and val == 'advisor':
-    #see and do advisor related activities
-    pass
+    elif val[1] and val == 'advisor':
+        pass
+#see and do advisor related activities
 
 # once everything is done, make a call to the exit function
-exit()
+    exit(tables, data_directory)
