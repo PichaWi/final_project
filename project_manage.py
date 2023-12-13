@@ -1,5 +1,5 @@
 # import database module
-import os
+import os, csv
 from database import Database, Table, read_csv, write_csv
 
 
@@ -13,6 +13,10 @@ def initializing(data_directory):
             table_data = read_csv(os.path.join(data_directory, filename))
             table = Table(table_name, table_data)
             tables.insert_table(table)
+
+    # Debugging print statements
+    print("Tables loaded:", [table.get_table_name() for table in tables.tables])
+
     return tables
 
 
@@ -33,10 +37,12 @@ def login(users_table):
     name_in = input('Your username: ')
     pass_in = input('Your password: ')
 
-    for user in users_table.table_data:
-        if user['username'] == name_in and user['password'] == pass_in:
-            return user['ID'], user['role']
+    if users_table:
+        for user in users_table.table_data:
+            if user['username'] == name_in and user['password'] == pass_in:
+                return user['ID'], user['role']
 
+    print("Login failed. Invalid credentials or user not found.")
     return None
 
 # here are things to do in this function:
@@ -62,6 +68,7 @@ if __name__ == "__main__":
     data_directory = 'C:\\Code for work\\Final_project'
     tables = initializing(data_directory)
     val = login(tables.search_table('login'))
+
 
 # based on the return value for login, activate the code that performs activities according to the role defined for that person_id
 

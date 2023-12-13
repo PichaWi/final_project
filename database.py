@@ -1,6 +1,25 @@
 # try wrapping the code below that reads a persons.csv file in a class and make it more general such that it can read in any csv file
-import csv
+import csv, os
 import copy
+
+__location__ = os.path.realpath(
+    os.path.join(os.getcwd(), os.path.dirname(__file__)))
+
+def read_csv_file(filename):
+    file_path = os.path.join(__location__, filename)
+    data = []
+    with open(file_path) as file:
+        rows = csv.DictReader(file)
+        for row in rows:
+            data.append(dict(row))
+    return data
+
+
+def write_csv(file_path, data):
+    with open(file_path, 'w', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=data[0].keys())
+        writer.writeheader()
+        writer.writerows(data)
 
 
 # add in code for a Database class
@@ -64,23 +83,12 @@ class Table:
         return f"{self.table_name}:{str(self.table_data)}"
 
 
-def read_csv(file_path):
-    with open(file_path, 'r') as file:
-        reader = csv.DictReader(file)
-        data = [row for row in reader]
-    return data
-
-
-def write_csv(file_path, data):
-    with open(file_path, 'w', newline='') as file:
-        writer = csv.DictWriter(file, fieldnames=data[0].keys())
-        writer.writeheader()
-        writer.writerows(data)
-
 # Create a Database instance
-
-
-
+persons = read_csv_file('persons.csv')
+login = read_csv_file('login.csv')
+project = read_csv_file('project.csv')
+advisor_pending_request = read_csv_file('advisor_pending_request.csv')
+member_pending_request = read_csv_file('member_pending_request.csv')
 # modify the code in the Table class so that it supports the insert operation where an entry can be added to a list of dictionary
 
 # modify the code in the Table class so that it supports the update operation where an entry's value associated with a key can be updated
