@@ -84,7 +84,6 @@ class Table:
         return self.table_name
 
     def get_project_status(self, project_id):
-        # Assuming 'status' is a key in your Project table
         project = next((item for item in self.table_data if item['ID'] == project_id), None)
         if project:
             return project['status']
@@ -92,7 +91,6 @@ class Table:
             return None
 
     def modify_project_information(self, project_id, new_information):
-        # Assuming 'ID' is a key in your Project table
         project_index = next((index for index, item in enumerate(self.table_data) if item['ID'] == project_id), None)
         if project_index is not None:
             # Update the project information

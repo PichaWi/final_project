@@ -15,9 +15,6 @@ def initializing(data_directory):
             table = Table(table_name, table_data)
             tables.insert_table(table)
 
-    # Debugging print statements
-    print("Tables loaded:", [table.get_table_name() for table in tables.tables])
-
     return tables
 
 
@@ -74,24 +71,19 @@ if __name__ == "__main__":
     def manage_database(tables):
         print("Database tables loaded:", [table.get_table_name() for table in tables.tables])
 
-        # Example: Display details of each table
         for table in tables.tables:
             print(f"\nDetails for {table.get_table_name()}:")
             print(table.table_data)
 
-        # Example: Update details in a table
         table_name_to_update = input("Enter the name of the table you want to update: ")
 
-        # Assuming the existence of an 'update_table' function in your Table class
         if tables.search_table(table_name_to_update):
             print(f"Current data for {table_name_to_update}:")
             print(tables.search_table(table_name_to_update).table_data)
 
-            # Get updated data
             updated_data = input("Enter the updated data (comma-separated values): ")
             updated_data_list = updated_data.split(',')
 
-            # Assuming the existence of an 'update_table' function in your Table class
             tables.search_table(table_name_to_update).update_table(updated_data_list)
             print(f"{table_name_to_update} updated successfully.")
         else:
@@ -99,7 +91,6 @@ if __name__ == "__main__":
 
 
     def faculty_activities(tables):
-        # Assuming 'Project' is the name of the project table
         project_table = tables.search_table('Project')
 
         # See requests to be a supervisor
@@ -107,7 +98,6 @@ if __name__ == "__main__":
         print("Supervisor requests:")
         print(supervisor_requests)
         response_to_supervisor_request = input("Enter your response to a supervisor request (accept/deny): ")
-        # Assuming the existence of a 'respond_to_supervisor_request' function in your Table class
         project_table.respond_to_supervisor_request(response_to_supervisor_request)
 
         # Evaluate a project
@@ -118,7 +108,6 @@ if __name__ == "__main__":
 
         # Approve a project
         project_id_to_approve = input("Enter the ID of the project you want to approve: ")
-        # Assuming the existence of an 'approve_project' function in your Table class
         project_table.approve_project(project_id_to_approve)
 
         print("Faculty activities completed.")
@@ -161,7 +150,6 @@ if __name__ == "__main__":
                     print(f"Request for project {request['project_id']} denied.")
 
         # 3. If more members needed, send out requests and update the member_pending_request table
-        # Requests can only go to those whose role is student, i.e., not yet become a member or a lead
         project_needs_members = tables.search_table('project').filter(lambda x: x['member_status'] == 'needed')
 
         for project in project_needs_members.table_data:
@@ -181,15 +169,12 @@ if __name__ == "__main__":
     elif val and val[1] == 'member':
         member_table = tables.search_table('persons')
 
-        # Display the count of unique IDs in the 'persons' table
         id_count = len(set(item['ID'] for item in member_table.table_data))
         print(f"The 'persons' table has {id_count} unique IDs.")
 
-        # Assuming 'project' table has project information
         project_table = tables.search_table('project')
 
-        # Member-specific activities
-        member_project_id = '123'  # Replace with the actual project ID for the member
+        member_project_id = tables.search_table('ID')
         status = project_table.get_project_status(member_project_id)
         print(f"Project status: {status}")
 
@@ -260,17 +245,14 @@ if __name__ == "__main__":
 
         # Send a request to be a supervisor
         supervisor_request = input("Enter your request to be a supervisor: ")
-        # Assuming the existence of a 'send_supervisor_request' function in your Table class
         project_table.send_supervisor_request(supervisor_request)
 
         # Send request to see the current work and situation of a project
         project_id_to_view = input("Enter the ID of the project you want to view: ")
-        # Assuming the existence of a 'send_project_view_request' function in your Table class
         project_table.send_project_view_request(project_id_to_view)
 
         # Send accept or deny response to lead
         lead_response = input("Enter your response to the lead (accept/deny): ")
-        # Assuming the existence of a 'send_lead_response' function in your Table class
         project_table.send_lead_response(lead_response)
 
         # See details of all projects
@@ -281,12 +263,10 @@ if __name__ == "__main__":
         # Evaluate a project
         project_id_to_evaluate = input("Enter the ID of the project you want to evaluate: ")
         evaluation_score = input("Enter your evaluation score (out of 10): ")
-        # Assuming the existence of an 'evaluate_project' function in your Table class
         project_table.evaluate_project(project_id_to_evaluate, evaluation_score)
 
         # Approve a project
         project_id_to_approve = input("Enter the ID of the project you want to approve: ")
-        # Assuming the existence of an 'approve_project' function in your Table class
         project_table.approve_project(project_id_to_approve)
 
         print("Advisor activities completed.")
