@@ -70,142 +70,196 @@
 
 ---
 ### Lead student
-#### 1.What this role do
+#### Method
 
-1.1.Come up with an interesting project plan.
-
---Lead student have to think and make up a 
-      plan for project with interesting idea.  
-
-1.2.Find and send invitation to
+1.1.Find and send invitation to
 other student to join and work.
 
 --Lead student have to find a member for a project
       work by sending invitation to them to join. 
 
-1.3.See and modify the project details.
+## class Table
+
+## Percentage
+- 40 %
+
+1.2.See and modify the project details.
 
 --Lead student can see all the project detail and
       can modify it.
 
-1.4.Send request message to advisor.
+## class Table
+
+## Percentage
+- 80 %
+
+1.3.Send request message to advisor.
 
 --Send request message to advisor to ask or tell
       about the project report for now.
 
-1.5.Summit the final project report.
+## class Table
+
+## Percentage
+- 30 %
+
+1.4.Summit the final project report.
 
 --Lead student have to be the one who have to 
 summit the final project report to faculty to check.
+
+## class Table
+
+## Percentage
+- 70 %
 
 ## missing part
 - Code didn't show the option and suddenly 
 - exit of it code and some part of it didn't work
 
-## Percentage
-- 40 %
-- 
 ---
 ### Member student
-#### 1.What this role do
+#### Method
 1.1.See and modify own project details.
 
 --Member can see the current project details
 and modify they own project detail that they make
 into it.
 
+## Percentage
+- 60 %
+
+## class Table
+
 ## missing part
 - Code didn't show the option and suddenly 
 - exit of it code and some part of it didn't work
 
-## Percentage
-- 60 %
-
 ---
 ### Student
-#### 1.What this role do
+#### Method
 1.1.See the invitation message from the lead.
 
 --See the invitation from lead student and can 
 accept or deny the invitation to join and became 
 member.
 
+## Percentage
+- 70 %
+
+## class Table
+
 ## missing part
 - Code didn't show the option and suddenly 
 - exit of it code and some part of it didn't work
 
-## Percentage
-- 70 %
-- 
 ---
 ### Advisor faculty
-#### 1.What this role do
+#### Method
 1.1.Send the request to be a supervisor.
 
 --Send request to see or the project current work
 and situation of it.
+
+## class Table
+
+## Percentage
+- 20 %
 
 1.2.Send accept or deny response.
 
 --Can send accept or deny response to lead to know
 if the response is correct or not.
 
+## class Table
+
+## Percentage
+- 20 %
+
 1.3.See details of all the project.
 
 --Can see all the detail of project as like lead
 student see.
 
+## class Table
+
+## Percentage
+- 80 %
+
 1.4.Evaluate projects.
 
 --Can evaluate the project by they self.
+
+## class Table
+
+## Percentage
+- 40 %
 
 1.5.Approve project.
 
 --Can approve the project that lead student have send.
 
+## class Table
+
+## Percentage
+- 20 %
+
 ## missing part
 - Code didn't show the option and suddenly 
 - exit of it code and some part of it didn't work
 
-## Percentage
-- 20 %
 ---
 ### Admin
-#### 1.What this role do
+#### Method
 1.1.Managing database.
 
 --Can managing the database and update all the 
 details and all the tables there.
 
+## Percentage
+- 60 %
+
+## class Table
+
 ## missing part
 - Code didn't show the option and suddenly 
 - exit of it code and some part of it didn't work
 
-## Percentage
-- 60 %
-
 ---
 ### normal faculty
-#### 1.What this role do
+#### Method
 1.1.See request to be supervisor.
 
 --Can see the request from the advisor faculty
 and can accept or deny that response.
 
+## Percentage
+- 50 %
+
+## class Table
+
 1.2.Evaluate project
 
 --Can evaluate the project 
+
+## Percentage
+- 50 %
+
+## class Table
 
 1.3.Approve the project
 
 --Can approve the project that have been send.
 
+## Percentage
+- 50 %
+
+## class Table
+
 ## missing part
 - Code didn't show the option and suddenly 
 - exit of it code and some part of it didn't work
 
-## Percentage
-- 50 %
 ---
 
 # The missing feature in this file
