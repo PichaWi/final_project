@@ -102,6 +102,9 @@ summit the final project report to faculty to check.
 - Code didn't show the option and suddenly 
 - exit of it code and some part of it didn't work
 
+## Percentage
+- 40 %
+- 
 ---
 ### Member student
 #### 1.What this role do
@@ -114,6 +117,9 @@ into it.
 ## missing part
 - Code didn't show the option and suddenly 
 - exit of it code and some part of it didn't work
+
+## Percentage
+- 60 %
 
 ---
 ### Student
@@ -128,6 +134,9 @@ member.
 - Code didn't show the option and suddenly 
 - exit of it code and some part of it didn't work
 
+## Percentage
+- 70 %
+- 
 ---
 ### Advisor faculty
 #### 1.What this role do
@@ -158,6 +167,8 @@ student see.
 - Code didn't show the option and suddenly 
 - exit of it code and some part of it didn't work
 
+## Percentage
+- 20 %
 ---
 ### Admin
 #### 1.What this role do
@@ -169,6 +180,9 @@ details and all the tables there.
 ## missing part
 - Code didn't show the option and suddenly 
 - exit of it code and some part of it didn't work
+
+## Percentage
+- 60 %
 
 ---
 ### normal faculty
@@ -190,6 +204,8 @@ and can accept or deny that response.
 - Code didn't show the option and suddenly 
 - exit of it code and some part of it didn't work
 
+## Percentage
+- 50 %
 ---
 
 # The missing feature in this file
